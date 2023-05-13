@@ -1,0 +1,12 @@
+.popoverContent {
+  background-color: white;
+  padding: 0.5rem 0;
+  z-index: 100;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  min-width: 235px;
+  top: 100%;
+  margin: 0.125rem 0 0;
+}
