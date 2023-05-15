@@ -13,6 +13,7 @@
 - lint-staged (コミット時に lint,型チェック実行)
 - react-icons (アイコン)
 - React Hook Form (フォームバリデーションライブラリ)
+- zod (スキーマ定義およびバリデーションライブラリ)
 
 ## npm script
 
