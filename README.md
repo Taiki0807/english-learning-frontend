@@ -60,4 +60,8 @@ npm run type-check
 
 型定義ファイルを配置
 
+### utils
+
+グローバルで使える便利な関数を配置
+
 ディレクトリ構造はこの [GitHub レポジトリ](https://github.com/fumi-sagawa/next-simple-template/blob/main/docs/directory-structure.md)を参考
