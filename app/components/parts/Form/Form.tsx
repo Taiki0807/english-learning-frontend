@@ -13,7 +13,6 @@ type FormProps<TFormValues extends FieldValues, Schema> = {
   className?: string;
   onSubmit: SubmitHandler<TFormValues>;
   children: (
-    // eslint-disable-next-line no-unused-vars
     methods: UseFormReturn<TFormValues>
   ) => React.ReactNode;
   options?: UseFormProps<TFormValues>;
