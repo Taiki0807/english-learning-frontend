@@ -1,9 +1,9 @@
 'use client';
 import { LoginForm } from '../../features';
-import style from './SingUp.module.css';
+import style from './SignUp.module.css';
 import { useAuthContext } from '@/app/components/features/LoginForm/AuthContext';
 
-export const SingUp = (): JSX.Element => {
+export const SignUp = (): JSX.Element => {
   const { loginUser } = useAuthContext();
   const handleSuccess = (values: any) => {
     if (loginUser) {
