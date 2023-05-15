@@ -14,7 +14,6 @@ const schema = z.object({
 export type LoginCredentials = z.infer<typeof schema>;
 
 type LoginSuccessCallback = (
-  // eslint-disable-next-line no-unused-vars
   values: LoginCredentials
 ) => void;
 
