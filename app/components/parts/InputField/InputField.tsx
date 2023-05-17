@@ -5,6 +5,7 @@ import {
 } from '../Form';
 
 type Props = {
+  id: string;
   type?: 'text' | 'email' | 'password';
   label?: string;
   className?: string;
@@ -12,6 +13,7 @@ type Props = {
 } & FieldWrapperPassThroughProps;
 
 export const InputField = ({
+  id,
   type = 'text',
   className = '',
   label,
@@ -21,7 +23,7 @@ export const InputField = ({
   return (
     <FieldWrapper error={error}>
       <input
-        id={label}
+        id={id}
         type={type}
         className={`${className} ${error ? 'error' : ''}`}
         placeholder={label}

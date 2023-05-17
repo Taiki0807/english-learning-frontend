@@ -39,6 +39,7 @@ export const LoginForm = ({
               Sign in to your account
             </p>
             <InputField
+              id="email"
               type="email"
               label="Email Address"
               error={formState.errors.email}
@@ -48,6 +49,7 @@ export const LoginForm = ({
               }`}
             />
             <InputField
+              id="password"
               type="password"
               label="Password"
               error={formState.errors.password}
