@@ -1,10 +1,14 @@
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { usePathname , useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useAuthContext } from '@/app/components/features/LoginForm/AuthContext';
+import { getFetcher } from '@/utils/httpClient';
 
 const useHeader = () => {
   const [anchorEl, setAnchorEl] =
     useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const { setUser } = useAuthContext();
   const handleClose = () => {
     setOpen(false);
   };
@@ -21,27 +25,11 @@ const useHeader = () => {
 
     return isActive;
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        anchorEl &&
-        !anchorEl.contains(event.target as Node)
-      ) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener(
-      'mousedown',
-      handleClickOutside
-    );
-    return () => {
-      document.removeEventListener(
-        'mousedown',
-        handleClickOutside
-      );
-    };
-  }, [anchorEl]);
+  const handleLogout = async () => {
+    await getFetcher('/api/v1/logout/');
+    setUser && setUser(undefined);
+    router.push('/signup');
+  };
 
   return {
     handleClick,
@@ -49,6 +37,7 @@ const useHeader = () => {
     open,
     anchorEl,
     NavItem,
+    handleLogout,
   };
 };
 
