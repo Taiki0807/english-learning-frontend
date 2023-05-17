@@ -6,6 +6,7 @@ interface Props {
   open: boolean;
   anchorEl: HTMLElement | null;
   onClose: () => void;
+  topValue?: string;
 }
 
 export const Popover = (props: Props): JSX.Element => {
@@ -15,12 +16,13 @@ export const Popover = (props: Props): JSX.Element => {
     <div>
       {props.open && (
         <div
-          className={style.popoverContent}
+          className={`${style.popoverContent}`}
           style={{
             position: 'absolute',
             left: props.anchorEl?.getBoundingClientRect()
               .right,
             transform: 'translateX(-100%)',
+            top: props.topValue,
           }}
         >
           {props.children}
