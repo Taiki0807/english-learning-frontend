@@ -9,6 +9,7 @@ import {
   useState,
   ReactNode,
   useEffect,
+  useCallback,
 } from 'react';
 import {
   getFetcher,
@@ -53,8 +54,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const [status, setStatus] = useState(0);
   const router = useRouter();
   const pathname = usePathname();
-  const isAvailableForViewing =
-    pathname === '/' || pathname === '/signup';
+  const isAvailableForViewing = pathname === '/signup';
   const loginUser = async (credentials: {
     email: string;
     password: string;
@@ -65,7 +65,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
     );
     if (res.success === 1) {
       getUser();
-      router.push('/about');
     }
   };
   const getUser = async () => {
@@ -76,7 +75,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       setUser(response);
     }
   };
-  const getStatus = async () => {
+  const getStatus = useCallback(async () => {
     try {
       const response: Status = await getFetcher(
         '/api/v1/status/'
@@ -89,14 +88,14 @@ export const AuthProvider = ({ children }: AuthProps) => {
         !isAvailableForViewing &&
         response.status === 0
       ) {
-        await router.push('/');
+        await router.push('/signup');
       }
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [router, isAvailableForViewing]);
 
-  const updateToken = async () => {
+  const updateToken = useCallback(async () => {
     const response: Refresh = await getFetcher(
       '/api/v1/refresh-token/'
     );
@@ -109,7 +108,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
     if (loading) {
       setLoading(false);
     }
-  };
+  }, [loading]);
   const values: AuthContextProps = {
     user,
     setUser,
@@ -117,8 +116,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
   };
   useEffect(() => {
     getStatus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getStatus]);
+
   useEffect(() => {
     const fourMinutes = 1000 * 4 * 60;
     const interval = setInterval(() => {
@@ -126,11 +125,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
         updateToken();
       }
     }, fourMinutes);
+
     return () => {
       clearInterval(interval);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
+  }, [loading, status, updateToken]);
   return (
     <AuthContext.Provider value={values}>
       {children}
