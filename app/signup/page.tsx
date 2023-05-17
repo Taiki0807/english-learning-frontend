@@ -1,10 +1,11 @@
 import { SignUp } from '../components/pages';
+import LoginLayout from '../layout/LoginLayout';
 
 const page = () => {
   return (
-    <div>
+    <LoginLayout>
       <SignUp />
-    </div>
+    </LoginLayout>
   );
 };
 
