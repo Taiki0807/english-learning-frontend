@@ -24,9 +24,9 @@ export const Header = (): JSX.Element => {
     <header className={style.header}>
       <div className={style.header__wrapper}>
         <nav className={style.nav}>
-          <a href="/" className={style.logo}>
+          <Link href="/" className={style.logo}>
             English Learning
-          </a>
+          </Link>
           <ul className={style.nav__wrapper}>
             {navItems.map((item) => (
               <li
