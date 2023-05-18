@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { z } from 'zod';
 import { Button, Form, InputField } from '../../parts';
 import style from './LoginForm.module.css';
@@ -61,7 +62,7 @@ export const LoginForm = ({
             <Button>Sign in</Button>
             <p className={style.signup__link}>
               No account?
-              <a href="">Sign up</a>
+              <Link href="">Sign up</Link>
             </p>
           </>
         )}
