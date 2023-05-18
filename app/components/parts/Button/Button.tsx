@@ -15,6 +15,7 @@ export const Button = (props: Props): JSX.Element => {
           style[`button-${color}`]
         }`}
         onClick={props.onClick}
+        type="submit"
       >
         {props.children}
       </button>

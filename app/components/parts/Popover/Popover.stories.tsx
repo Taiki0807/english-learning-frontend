@@ -12,7 +12,6 @@ const meta = {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          top: '0',
         }}
       >
         <Story />
@@ -45,6 +44,7 @@ const ButtonWithHooks = () => {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
+        topValue="unset"
       >
         popover
       </Popover>

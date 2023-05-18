@@ -12,6 +12,8 @@
 - hygen (コンポーネントの自動生成)
 - lint-staged (コミット時に lint,型チェック実行)
 - react-icons (アイコン)
+- React Hook Form (フォームバリデーションライブラリ)
+- zod (スキーマ定義およびバリデーションライブラリ)
 
 ## npm script
 
@@ -57,5 +59,9 @@ npm run type-check
 ### types
 
 型定義ファイルを配置
+
+### utils
+
+グローバルで使える便利な関数を配置
 
 ディレクトリ構造はこの [GitHub レポジトリ](https://github.com/fumi-sagawa/next-simple-template/blob/main/docs/directory-structure.md)を参考
