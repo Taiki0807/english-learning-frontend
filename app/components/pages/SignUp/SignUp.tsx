@@ -1,17 +1,19 @@
 'use client';
-import { LoginForm } from '../../features';
+import { LoginForm, Toast } from '../../features';
 import style from './SignUp.module.css';
-import { useAuthContext } from '@/app/components/features/LoginForm/AuthContext';
+import useSignUp from './useSignUp';
 
 export const SignUp = (): JSX.Element => {
-  const { loginUser } = useAuthContext();
-  const handleSuccess = (values: any) => {
-    if (loginUser) {
-      loginUser(values);
-    }
-  };
+  const { handleClose, handleSuccess, user } = useSignUp();
   return (
     <div className={style.signup}>
+      {user && (
+        <Toast
+          outHideDuration={3000}
+          message={`${user.username}さん認証に成功しました。`}
+          onClose={handleClose}
+        />
+      )}
       <LoginForm onSuccess={handleSuccess} />
     </div>
   );
