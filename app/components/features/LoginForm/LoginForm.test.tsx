@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { within } from '@testing-library/dom';
+import { within } from '@storybook/testing-library';
 import { render, act } from '@testing-library/react';
 import * as stories from './LoginForm.stories';
 
