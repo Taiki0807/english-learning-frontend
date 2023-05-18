@@ -1,5 +1,5 @@
-import { Header } from './components/pages';
 import './globals.css';
+import { AuthProvider } from '@/app/components/features/LoginForm/AuthContext';
 
 export default function RootLayout({
   children,
@@ -14,8 +14,7 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <Header />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

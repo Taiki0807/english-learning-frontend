@@ -13,6 +13,7 @@ export const Header = (): JSX.Element => {
     open,
     anchorEl,
     NavItem,
+    handleLogout,
   } = useHeader();
   const navItems = [
     { href: '/', label: 'Home' },
@@ -23,9 +24,9 @@ export const Header = (): JSX.Element => {
     <header className={style.header}>
       <div className={style.header__wrapper}>
         <nav className={style.nav}>
-          <a href="/" className={style.logo}>
+          <Link href="/" className={style.logo}>
             English Learning
-          </a>
+          </Link>
           <ul className={style.nav__wrapper}>
             {navItems.map((item) => (
               <li
@@ -64,7 +65,18 @@ export const Header = (): JSX.Element => {
               anchorEl={anchorEl}
               onClose={handleClose}
             >
-              popover
+              <p className={style.dropdown__item}>
+                profile
+              </p>
+              <div
+                className={style.dropdown__divider}
+              ></div>
+              <button
+                className={style.dropdown__item}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </Popover>
           </div>
         </nav>
