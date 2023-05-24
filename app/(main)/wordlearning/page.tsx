@@ -1,4 +1,4 @@
-import { WordlearningPage } from '@/app/components/pages';
+import { WordlearningPage } from '@/app/_components/pages';
 
 const page = () => {
   return (

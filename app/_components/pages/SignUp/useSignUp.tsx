@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useAuthContext } from '@/app/components/features/LoginForm/AuthContext';
+import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
 
 const useSignUp = () => {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useAuthContext } from '@/app/components/features/LoginForm/AuthContext';
+import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
 import { getFetcher } from '@/utils/httpClient';
 
 const useHeader = () => {
