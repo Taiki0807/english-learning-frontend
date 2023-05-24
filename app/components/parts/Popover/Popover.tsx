@@ -1,3 +1,4 @@
+'use client';
 import { useRef } from 'react';
 import style from './Popover.module.css';
 import usePopover from './usePopover';
