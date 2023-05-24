@@ -1,0 +1,26 @@
+.navitem {
+  color: rgb(54, 65, 82);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+.navitem:hover {
+  color: rgb(94, 53, 177);
+}
+.navitem__link {
+  border-radius: 12px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(54, 65, 82);
+  padding: 1.2rem;
+}
+.navitem__link a {
+  color: rgb(54, 65, 82);
+}
+.button__icon {
+  font-size: 1.2rem;
+}
+.navitem__link:hover {
+  background-color: rgb(237, 231, 246);
+}
