@@ -16,7 +16,8 @@ const Card = ({ id, name }: Props) => {
   const handleClick = async () => {
     try {
       const responseData = await getFetcher(
-        `/wordbook/courses/${id}/quiz/`
+        `/wordbook/courses/${id}/quiz/`,
+        { cache: 'no-store' }
       );
       console.log(responseData);
 
