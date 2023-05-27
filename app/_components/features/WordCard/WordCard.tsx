@@ -1,12 +1,19 @@
+'use client';
 import { useState } from 'react';
 import style from './WordCard.module.css';
+import { useGetWord } from './useGetWord';
 
-export const WordCard = (): JSX.Element => {
+interface Props {
+  id: string;
+}
+export const WordCard = ({ id }: Props): JSX.Element => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+  const { Data } = useGetWord({ id });
+  if (!Data) return <div>Loading...</div>;
   return (
     <div className={style.flipCard} onClick={handleClick}>
       <div
@@ -16,11 +23,11 @@ export const WordCard = (): JSX.Element => {
       >
         <div className={style.flipCardFront}>
           {/* Front side content */}
-          <h2>Front Side</h2>
+          <h2>{Data.word}</h2>
         </div>
         <div className={style.flipCardBack}>
           {/* Back side content */}
-          <h2>Back Side</h2>
+          <h2>{Data.meaning}</h2>
         </div>
       </div>
     </div>
