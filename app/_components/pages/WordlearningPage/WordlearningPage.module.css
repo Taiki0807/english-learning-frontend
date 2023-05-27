@@ -1,17 +1,30 @@
-.wordlearningPage {
+.learning__page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
   flex: 1;
+  padding: 1rem 3rem;
 }
-.btn {
-  padding: 100px;
+.learning__page h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: 1.2rem;
+}
+.courses__wrapper {
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  background-color: #fff;
   width: 100%;
+}
+.card_items {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 290px;
+  justify-content: center;
+  gap: 0.25rem;
 }
