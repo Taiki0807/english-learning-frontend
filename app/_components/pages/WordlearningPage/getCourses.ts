@@ -1,7 +1,7 @@
 import { getFetcher } from '@/utils/httpClient';
 
 interface Courses {
-  id: number;
+  id: string;
   name: string;
 }
 
