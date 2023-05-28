@@ -1,17 +1,17 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useSetRecoilState } from 'recoil';
-import { wordsIDState } from '../../wordsID';
 import style from './Card.module.css';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { getFetcher } from '@/utils/httpClient';
 
 interface Props {
-  id: number;
+  id: string;
   name: string;
 }
 const Card = ({ id, name }: Props) => {
-  const setID = useSetRecoilState(wordsIDState);
   const router = useRouter();
+  const [, setWordsID] = useLocalStorage('wordsID', ['']);
+  const [, setCourseID] = useLocalStorage('courseID', '');
 
   const handleClick = async () => {
     try {
@@ -26,7 +26,8 @@ const Card = ({ id, name }: Props) => {
         responseData.length > 0
       ) {
         const firstId = responseData[0];
-        setID(responseData);
+        setWordsID(responseData);
+        setCourseID(id);
         router.push(`/wordlearning/${firstId}/`);
       }
     } catch (error) {
