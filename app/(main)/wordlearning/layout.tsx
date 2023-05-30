@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { RecoilRoot } from 'recoil';
 import style from './wordlearning.module.css';
 import { SideBar } from '@/app/_components/pages';
 
@@ -23,7 +22,7 @@ export default function WordLearningLayout({
             : style.main__close
         } ${style.main}`}
       >
-        <RecoilRoot>{children}</RecoilRoot>
+        {children}
       </div>
     </div>
   );
