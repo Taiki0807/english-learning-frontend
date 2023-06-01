@@ -31,6 +31,26 @@
 }
 .modal__wrapper {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal__result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.modal__bottom {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.modal__item {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

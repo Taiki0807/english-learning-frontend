@@ -6,21 +6,30 @@ import {
   FaRegArrowAltCircleRight,
 } from 'react-icons/fa';
 import { WordCard } from '../../features';
-import { Button, Modal } from '../../parts';
+import { Button, Modal, PieChart } from '../../parts';
 import style from './WordPage.module.css';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 interface Props {
   id: string;
 }
-
+type ResponseData = {
+  reviews: any[];
+  course_learning_rate: number;
+  course_progress_rate: number;
+  user_learning_data: {
+    correct_answers: number;
+    total_answers: number;
+  };
+};
 export const WordPage = ({ id }: Props) => {
   const [wordsID] = useLocalStorage('wordsID', ['']);
 
   const [courseID] = useLocalStorage('courseID', '');
   const router = useRouter();
   const [modal, setModal] = useState(false);
-  const [response, setResponse] = useState(0);
+  const [response, setResponse] =
+    useState<ResponseData | null>(null);
   const findIndexById = (id: string) => {
     const index = wordsID.findIndex(
       (item: string) => item === id
@@ -51,9 +60,7 @@ export const WordPage = ({ id }: Props) => {
 
         const data = await response.json();
         if (courseID && data[courseID]?.length > 0) {
-          setResponse(
-            data[courseID][0].course_progress_rate
-          );
+          setResponse(data[courseID][0]);
         }
         setModal(true);
       } catch (error) {
@@ -83,8 +90,47 @@ export const WordPage = ({ id }: Props) => {
     <div className={style.wordlearningPage}>
       <Modal open={modal} onClose={handleClose_modal}>
         <div className={style.modal__wrapper}>
-          <p>終了！</p>
-          進捗率：{response * 100}%
+          <h1>結果🎉</h1>
+          <div className={style.modal__result}>
+            <p>正解数</p>
+            <p>
+              {
+                response?.user_learning_data
+                  ?.correct_answers
+              }
+              /{response?.user_learning_data?.total_answers}
+            </p>
+          </div>
+          <div className={style.modal__bottom}>
+            <div className={style.modal__item}>
+              <h2>進捗率</h2>
+              <PieChart
+                percentage={
+                  response?.course_progress_rate !==
+                  undefined
+                    ? response.course_progress_rate * 100
+                    : 0
+                }
+              />
+            </div>
+            <div className={style.modal__item}>
+              <h2>正解率</h2>
+              <PieChart
+                percentage={
+                  response?.user_learning_data
+                    ?.correct_answers &&
+                  response?.user_learning_data
+                    ?.total_answers
+                    ? (response.user_learning_data
+                        .correct_answers /
+                        response.user_learning_data
+                          .total_answers) *
+                      100
+                    : 0
+                }
+              />
+            </div>
+          </div>
         </div>
       </Modal>
       <WordCard id={id} />
