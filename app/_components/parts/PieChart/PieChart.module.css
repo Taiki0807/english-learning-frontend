@@ -1,0 +1,46 @@
+.piechart__wrapper {
+  position: relative;
+}
+.piechart__wrapper circle {
+  fill: none;
+  stroke-width: 10;
+  stroke: #f3f3f3;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+}
+.piechart__wrapper svg {
+  transform: rotate(-90deg);
+  width: 150px;
+  height: 150px;
+}
+.piechart__wrapper circle.line {
+  stroke-dashoffset: calc(440 - (440 * 88) / 100);
+  stroke: #03a9f4;
+}
+.line {
+  animation: circleAnim 1.2s forwards;
+}
+@keyframes circleAnim {
+  0% {
+    stroke-dasharray: 0 440;
+  }
+  99.9%,
+  to {
+    stroke-dasharray: 440 440;
+  }
+}
+
+.piechart__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: #111;
+}
+.piechart__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.2rem;
+}
