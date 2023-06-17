@@ -10,7 +10,7 @@ const useSignUp = () => {
     }
   };
   const handleClose = () => {
-    router.push('/about');
+    router.push('/wordlearning');
   };
   return { handleSuccess, handleClose, user };
 };
