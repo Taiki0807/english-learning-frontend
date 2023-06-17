@@ -8,7 +8,9 @@ import {
 import { WordCard } from '../../features';
 import { Button, Modal, PieChart } from '../../parts';
 import style from './WordPage.module.css';
+import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { postFetcher } from '@/utils/httpClient';
 
 interface Props {
   id: string;
@@ -36,6 +38,8 @@ export const WordPage = ({ id }: Props) => {
     );
     return index;
   };
+
+  const { user } = useAuthContext();
 
   const Index = findIndexById(id);
   const nextWord = async () => {
@@ -76,10 +80,47 @@ export const WordPage = ({ id }: Props) => {
     }
   };
   const handleCorrectAnswer = () => {
+    const requestBody = {
+      correct: true,
+      flashcard: id,
+      user: user?.id,
+    };
+    postFetcher('/wordbook/reviews/', requestBody)
+      .then(() => {
+        nextWord();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     nextWord();
   };
   const handleIncorrectAnswer = () => {
+    const requestBody = {
+      correct: false,
+      flashcard: id,
+      user: user?.id,
+    };
+    postFetcher('/wordbook/reviews/', requestBody)
+      .then((response) => {
+        console.log(response);
+        nextWord();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     nextWord();
+  };
+  const handleWordClose = async () => {
+    await postFetcher('/wordbook/end-session/', {
+      course_id: courseID,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    await router.push('wordlearning');
   };
 
   const handleClose_modal = () => {
@@ -114,7 +155,7 @@ export const WordPage = ({ id }: Props) => {
               />
             </div>
             <div className={style.modal__item}>
-              <h2>正解率</h2>
+              <h2>今回の正解率</h2>
               <PieChart
                 percentage={
                   response?.user_learning_data
@@ -131,6 +172,7 @@ export const WordPage = ({ id }: Props) => {
               />
             </div>
           </div>
+          <Button onClick={handleWordClose}>終了</Button>
         </div>
       </Modal>
       <WordCard id={id} />
