@@ -92,6 +92,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       }
     } catch (error) {
       console.error(error);
+      await router.push('/signup');
     }
   }, [router, isAvailableForViewing]);
 
