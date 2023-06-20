@@ -15,15 +15,33 @@ import { postFetcher } from '@/utils/httpClient';
 interface Props {
   id: string;
 }
-type ResponseData = {
-  reviews: any[];
+type Review = {
+  id: number;
+  correct: boolean;
+  review_date: string;
+  flashcard: string;
+  user: number;
+};
+
+type ForgettingCurveData = {
+  review_date: string;
+  retention_rate: number;
+};
+
+type UserLearningData = {
+  correct_answers: number;
+  total_answers: number;
+  round_count: number;
+  forgetting_curve: Record<number, ForgettingCurveData[]>;
+};
+
+type LearningSession = {
+  reviews: Review[];
   course_learning_rate: number;
   course_progress_rate: number;
-  user_learning_data: {
-    correct_answers: number;
-    total_answers: number;
-  };
+  user_learning_data: UserLearningData;
 };
+
 export const WordPage = ({ id }: Props) => {
   const [wordsID] = useLocalStorage('wordsID', ['']);
 
@@ -31,7 +49,7 @@ export const WordPage = ({ id }: Props) => {
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const [response, setResponse] =
-    useState<ResponseData | null>(null);
+    useState<LearningSession | null>(null);
   const findIndexById = (id: string) => {
     const index = wordsID.findIndex(
       (item: string) => item === id
