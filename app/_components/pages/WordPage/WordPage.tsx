@@ -79,47 +79,50 @@ export const WordPage = ({ id }: Props) => {
       router.push(`/wordlearning/${nextWordId}/`);
     }
   };
-  const handleCorrectAnswer = () => {
+  const handleCorrectAnswer = async () => {
     const requestBody = {
       correct: true,
       flashcard: id,
       user: user?.id,
     };
-    postFetcher('/wordbook/reviews/', requestBody)
-      .then(() => {
-        nextWord();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      await postFetcher('/wordbook/reviews/', requestBody);
+      nextWord();
+    } catch (error) {
+      console.error(error);
+    }
     nextWord();
   };
-  const handleIncorrectAnswer = () => {
+  const handleIncorrectAnswer = async () => {
     const requestBody = {
       correct: false,
       flashcard: id,
       user: user?.id,
     };
-    postFetcher('/wordbook/reviews/', requestBody)
-      .then((response) => {
-        console.log(response);
-        nextWord();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      const response = await postFetcher(
+        '/wordbook/reviews/',
+        requestBody
+      );
+      console.log(response);
+      nextWord();
+    } catch (error) {
+      console.error(error);
+    }
     nextWord();
   };
   const handleWordClose = async () => {
-    await postFetcher('/wordbook/end-session/', {
-      course_id: courseID,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      const response = await postFetcher(
+        '/wordbook/end-session/',
+        {
+          course_id: courseID,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
     router.push('wordlearning');
   };
 
