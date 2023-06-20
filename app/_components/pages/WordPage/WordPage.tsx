@@ -46,7 +46,7 @@ export const WordPage = ({ id }: Props) => {
     if (Index < wordsID.length - 1) {
       const newIndex = Index + 1;
       const currentWordId = wordsID[newIndex];
-      await router.push(`/wordlearning/${currentWordId}/`);
+      router.push(`/wordlearning/${currentWordId}/`);
     } else {
       try {
         const today = new Date()
@@ -120,7 +120,7 @@ export const WordPage = ({ id }: Props) => {
       .catch((error) => {
         console.error(error);
       });
-    await router.push('wordlearning');
+    router.push('wordlearning');
   };
 
   const handleClose_modal = () => {

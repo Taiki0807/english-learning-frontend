@@ -88,11 +88,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
         !isAvailableForViewing &&
         response.status === 0
       ) {
-        await router.push('/signup');
+        router.push('/signup');
       }
     } catch (error) {
       console.error(error);
-      await router.push('/signup');
+      router.push('/signup');
     }
   }, [router, isAvailableForViewing]);
 
