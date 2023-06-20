@@ -41,10 +41,10 @@ export const WordPage = ({ id }: Props) => {
 
   const { user } = useAuthContext();
 
-  const Index = findIndexById(id);
+  const index = findIndexById(id);
   const nextWord = async () => {
-    if (Index < wordsID.length - 1) {
-      const newIndex = Index + 1;
+    if (index < wordsID.length - 1) {
+      const newIndex = index + 1;
       const currentWordId = wordsID[newIndex];
       router.push(`/wordlearning/${currentWordId}/`);
     } else {
@@ -73,8 +73,8 @@ export const WordPage = ({ id }: Props) => {
     }
   };
   const prevWord = () => {
-    if (Index > 0) {
-      const prevIndex = Index - 1;
+    if (index > 0) {
+      const prevIndex = index - 1;
       const currentWordId = wordsID[prevIndex];
       router.push(`/wordlearning/${currentWordId}/`);
     }
@@ -123,13 +123,13 @@ export const WordPage = ({ id }: Props) => {
     router.push('wordlearning');
   };
 
-  const handleClose_modal = () => {
+  const handleCloseModal = () => {
     setModal(false);
   };
 
   return (
     <div className={style.wordlearningPage}>
-      <Modal open={modal} onClose={handleClose_modal}>
+      <Modal open={modal} onClose={handleCloseModal}>
         <div className={style.modal__wrapper}>
           <h1>結果🎉</h1>
           <div className={style.modal__result}>
@@ -186,7 +186,7 @@ export const WordPage = ({ id }: Props) => {
           </button>
 
           <p>
-            {Index + 1}/{wordsID.length}
+            {index + 1}/{wordsID.length}
           </p>
 
           <button
