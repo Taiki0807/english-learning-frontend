@@ -12,8 +12,8 @@ export const WordCard = ({ id }: Props): JSX.Element => {
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
-  const { Data } = useGetWord({ id });
-  if (!Data) return <div>Loading...</div>;
+  const { data } = useGetWord({ id });
+  if (!data) return <div>Loading...</div>;
   return (
     <div className={style.flipCard} onClick={handleClick}>
       <div
@@ -23,11 +23,11 @@ export const WordCard = ({ id }: Props): JSX.Element => {
       >
         <div className={style.flipCardFront}>
           {/* Front side content */}
-          <h2>{Data.word}</h2>
+          <h2>{data.word}</h2>
         </div>
         <div className={style.flipCardBack}>
           {/* Back side content */}
-          <h2>{Data.meaning}</h2>
+          <h2>{data.meaning}</h2>
         </div>
       </div>
     </div>

@@ -6,8 +6,8 @@ interface Word {
   word: string;
   meaning: string;
   user: number;
-  last_review_date: string | null;
-  next_review_date: string | null;
+  lastReviewDate: string | null;
+  nextReviewDate: string | null;
 }
 
 interface Props {
@@ -18,6 +18,6 @@ export const useGetWord = ({ id }: Props) => {
   const { data } = useSWR<Word>(url, getFetcher);
 
   return {
-    Data: data,
+    data: data,
   };
 };
