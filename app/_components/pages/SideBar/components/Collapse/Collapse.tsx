@@ -24,18 +24,6 @@ export const Collapse: React.FC<CollapseProps> = ({
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      const timer = setTimeout(() => {
-        setHeight(contentRef.current?.scrollHeight || 0);
-      }, 0);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [isOpen]);
-
   const style: React.CSSProperties = {
     height,
     overflow: 'hidden',
