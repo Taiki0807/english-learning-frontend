@@ -10,7 +10,7 @@ import { Button, Modal, PieChart } from '../../parts';
 import style from './WordPage.module.css';
 import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { postFetcher } from '@/utils/httpClient';
+import { postFetcher , getFetcher } from '@/utils/httpClient';
 
 interface Props {
   id: string;
@@ -32,10 +32,19 @@ type UserLearningData = {
   correct_answers: number;
   total_answers: number;
   round_count: number;
-  forgetting_curve: Record<number, ForgettingCurveData[]>;
+  forgetting_curve: Record<string, ForgettingCurveData[]>;
 };
 
 type LearningSession = {
+  [courseID: string]: {
+    reviews: Review[];
+    course_learning_rate: number;
+    course_progress_rate: number;
+    user_learning_data: UserLearningData;
+  }[];
+};
+
+type Response = {
   reviews: Review[];
   course_learning_rate: number;
   course_progress_rate: number;
@@ -48,8 +57,9 @@ export const WordPage = ({ id }: Props) => {
   const [courseID] = useLocalStorage('courseID', '');
   const router = useRouter();
   const [modal, setModal] = useState(false);
-  const [response, setResponse] =
-    useState<LearningSession | null>(null);
+  const [response, setResponse] = useState<Response | null>(
+    null
+  );
   const findIndexById = (id: string) => {
     const index = wordsID.findIndex(
       (item: string) => item === id
@@ -70,20 +80,18 @@ export const WordPage = ({ id }: Props) => {
         const today = new Date()
           .toISOString()
           .split('T')[0];
-        const url = `http://localhost:8000/wordbook/reviews/?course_id=${courseID}&review_date=${today}`;
+        const url = `/wordbook/reviews/?course_id=${courseID}&review_date=${today}`;
 
-        const response = await fetch(url, {
-          credentials: 'include',
-        });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        const response = await getFetcher<LearningSession>(
+          url,
+          {
+            credentials: 'include',
+          }
+        );
+        if (courseID && response[courseID]?.length > 0) {
+          setResponse(response[courseID][0]);
         }
 
-        const data = await response.json();
-        if (courseID && data[courseID]?.length > 0) {
-          setResponse(data[courseID][0]);
-        }
         setModal(true);
       } catch (error) {
         console.error(error);
