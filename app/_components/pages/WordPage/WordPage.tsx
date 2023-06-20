@@ -45,8 +45,8 @@ export const WordPage = ({ id }: Props) => {
   const nextWord = async () => {
     if (index < wordsID.length - 1) {
       const newIndex = index + 1;
-      const currentWordId = wordsID[newIndex];
-      router.push(`/wordlearning/${currentWordId}/`);
+      const nextWordId = wordsID[newIndex];
+      router.push(`/wordlearning/${nextWordId}/`);
     } else {
       try {
         const today = new Date()
@@ -75,8 +75,8 @@ export const WordPage = ({ id }: Props) => {
   const prevWord = () => {
     if (index > 0) {
       const prevIndex = index - 1;
-      const currentWordId = wordsID[prevIndex];
-      router.push(`/wordlearning/${currentWordId}/`);
+      const nextWordId = wordsID[prevIndex];
+      router.push(`/wordlearning/${nextWordId}/`);
     }
   };
   const handleCorrectAnswer = () => {
