@@ -10,7 +10,10 @@ import { Button, Modal, PieChart } from '../../parts';
 import style from './WordPage.module.css';
 import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { postFetcher , getFetcher } from '@/utils/httpClient';
+import {
+  postFetcher,
+  getFetcher,
+} from '@/utils/httpClient';
 
 interface Props {
   id: string;
@@ -149,7 +152,7 @@ export const WordPage = ({ id }: Props) => {
     } catch (error) {
       console.error(error);
     }
-    router.push('wordlearning');
+    router.push('/wordlearning');
   };
 
   const handleCloseModal = () => {
