@@ -88,26 +88,31 @@ export const AuthProvider = ({ children }: AuthProps) => {
         !isAvailableForViewing &&
         response.status === 0
       ) {
-        router.push('/signup');
+        updateToken();
       }
     } catch (error) {
       console.error(error);
-      router.push('/signup');
+      updateToken();
     }
   }, [router, isAvailableForViewing]);
 
   const updateToken = useCallback(async () => {
-    const response: Refresh = await getFetcher(
-      '/api/v1/refresh-token/'
-    );
-    const refresh = response.refresh;
-    if (refresh !== null) {
-      await postFetcher('/api/v1/refresh/', {
-        refresh: refresh,
-      });
-    }
-    if (loading) {
-      setLoading(false);
+    try {
+      const response: Refresh = await getFetcher(
+        '/api/v1/refresh-token/'
+      );
+      const refresh = response.refresh;
+      if (refresh !== null) {
+        await postFetcher('/api/v1/refresh/', {
+          refresh: refresh,
+        });
+      }
+      if (loading) {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+      router.push('/signup');
     }
   }, [loading]);
   const values: AuthContextProps = {
@@ -131,6 +136,20 @@ export const AuthProvider = ({ children }: AuthProps) => {
       clearInterval(interval);
     };
   }, [loading, status, updateToken]);
+
+  useEffect(() => {
+    const handleWindowFocus = () => {
+      getStatus();
+    };
+    window.addEventListener('focus', handleWindowFocus);
+
+    return () => {
+      window.removeEventListener(
+        'focus',
+        handleWindowFocus
+      );
+    };
+  }, []);
   return (
     <AuthContext.Provider value={values}>
       {children}
