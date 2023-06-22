@@ -75,26 +75,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
       setUser(response);
     }
   };
-  const getStatus = useCallback(async () => {
-    try {
-      const response: Status = await getFetcher(
-        '/api/v1/status/'
-      );
-      setStatus(response.status);
-      if (response.status === 1 && isAvailableForViewing) {
-        getUser();
-        router.push('/about');
-      } else if (
-        !isAvailableForViewing &&
-        response.status === 0
-      ) {
-        updateToken();
-      }
-    } catch (error) {
-      console.error(error);
-      updateToken();
-    }
-  }, [router, isAvailableForViewing]);
 
   const updateToken = useCallback(async () => {
     try {
@@ -114,7 +94,28 @@ export const AuthProvider = ({ children }: AuthProps) => {
       console.error(error);
       router.push('/signup');
     }
-  }, [loading]);
+  }, [loading, router]);
+
+  const getStatus = useCallback(async () => {
+    try {
+      const response: Status = await getFetcher(
+        '/api/v1/status/'
+      );
+      setStatus(response.status);
+      if (response.status === 1 && isAvailableForViewing) {
+        getUser();
+        router.push('/about');
+      } else if (
+        !isAvailableForViewing &&
+        response.status === 0
+      ) {
+        updateToken();
+      }
+    } catch (error) {
+      console.error(error);
+      updateToken();
+    }
+  }, [router, isAvailableForViewing, updateToken]);
   const values: AuthContextProps = {
     user,
     setUser,
@@ -149,7 +150,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
         handleWindowFocus
       );
     };
-  }, []);
+  }, [getStatus]);
+
   return (
     <AuthContext.Provider value={values}>
       {children}
