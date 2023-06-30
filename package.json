@@ -32,6 +32,7 @@
     "recoil": "^0.7.7",
     "swr": "^2.1.5",
     "typescript": "5.0.4",
+    "xlsx": "file:vendor/xlsx-0.20.0.tgz",
     "zod": "^3.21.4"
   },
   "devDependencies": {
