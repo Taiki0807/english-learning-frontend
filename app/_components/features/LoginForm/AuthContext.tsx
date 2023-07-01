@@ -102,6 +102,9 @@ export const AuthProvider = ({ children }: AuthProps) => {
         '/api/v1/status/'
       );
       setStatus(response.status);
+      if (response.status === 1) {
+        getUser();
+      }
       if (response.status === 1 && isAvailableForViewing) {
         getUser();
         router.push('/about');
