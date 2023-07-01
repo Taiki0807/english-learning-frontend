@@ -19,6 +19,7 @@ export const Select = ({
       <select
         id="selectBox"
         className={style['select-box']}
+        defaultValue=""
         onChange={(event) => onChange(event.target.value)}
       >
         <option value="" selected>
