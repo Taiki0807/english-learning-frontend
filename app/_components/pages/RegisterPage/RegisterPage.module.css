@@ -1,0 +1,26 @@
+.registerPage {
+  margin: 0 auto;
+  height: calc(100vh - 61px);
+  width: 100%;
+  padding: 0 16rem;
+}
+.table__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.table__title h1 {
+  margin: 0;
+}
+.table__top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+.select {
+  flex: 0.3;
+}
