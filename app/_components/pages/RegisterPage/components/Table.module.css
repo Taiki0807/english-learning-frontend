@@ -10,6 +10,7 @@
   background-color: #fff;
   border-radius: 10px;
   text-align: center;
+  min-height: 200px;
 }
 .tbl {
   width: 100%;
