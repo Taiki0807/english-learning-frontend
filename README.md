@@ -14,6 +14,8 @@
 - react-icons (アイコン)
 - React Hook Form (フォームバリデーションライブラリ)
 - zod (スキーマ定義およびバリデーションライブラリ)
+- SWR (データ取得の React Hooks)
+- Recoil (状態管理)
 
 ## npm script
 

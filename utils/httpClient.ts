@@ -1,5 +1,6 @@
 export const getFetcher = <T>(
   path: string,
+  options = {},
   headers = {}
 ): Promise<T> => {
   return fetch(
@@ -11,6 +12,7 @@ export const getFetcher = <T>(
         'Content-Type': 'application/json',
         ...headers,
       },
+      ...options,
     }
   ).then((res) => HandleErrors(res));
 };

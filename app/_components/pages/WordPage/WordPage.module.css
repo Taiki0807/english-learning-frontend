@@ -1,0 +1,56 @@
+.wordlearningPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+}
+.btn {
+  padding: 2rem;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  width: fit-content;
+  gap: 2rem;
+}
+.card__bottom {
+  padding: 1rem;
+}
+.card__control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.modal__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal__result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.modal__bottom {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.modal__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
