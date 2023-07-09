@@ -1,0 +1,20 @@
+.listItemButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(54, 65, 82);
+  padding: 1.2rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+.listItemButton:hover {
+  background-color: rgb(237, 231, 246);
+}
+.button__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.button__icon {
+  font-size: 1.2rem;
+}

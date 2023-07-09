@@ -1,0 +1,18 @@
+.card {
+  width: 300px;
+  max-width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card__image {
+  height: 7rem;
+  background-color: blue;
+}
+.card__text {
+  padding: 0.8rem;
+  font-size: 1rem;
+}

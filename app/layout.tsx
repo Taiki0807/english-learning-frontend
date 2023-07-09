@@ -1,5 +1,5 @@
 import './globals.css';
-import { AuthProvider } from '@/app/components/features/LoginForm/AuthContext';
+import { AuthProvider } from '@/app/_components/features/LoginForm/AuthContext';
 
 export default function RootLayout({
   children,
