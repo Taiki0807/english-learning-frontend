@@ -25,10 +25,9 @@ const Card = ({ id, name }: Props) => {
         Array.isArray(responseData) &&
         responseData.length > 0
       ) {
-        const firstId = responseData[0];
         setWordsID(responseData);
         setCourseID(id);
-        router.push(`/wordlearning/${firstId}/`);
+        router.push(`/wordlearning/${id}/`);
       }
     } catch (error) {
       // Handle error
