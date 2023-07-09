@@ -1,0 +1,20 @@
+.wordDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.wordinfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
+  margin: 1rem;
+}
