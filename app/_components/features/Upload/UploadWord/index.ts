@@ -1,0 +1,1 @@
+export { UploadWord } from './UploadWord';
