@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../features/LoginForm/AuthContext';
-import { Button, Select } from '../../parts';
+import { Button, Input, Select } from '../../parts';
 import style from './RegisterPage.module.css';
 import Table from './components/Table';
 import { UploadWord } from '@/app/_components/features';
@@ -20,6 +20,7 @@ const RegisterPage = () => {
   >([]);
   const [filteredItem, setFilteredItem] =
     useState<any[]>(pres);
+  const [input, setInput] = useState('');
   const { user } = useAuthContext();
   useEffect(() => {
     if (pres && pres.length > 0) {
@@ -44,13 +45,44 @@ const RegisterPage = () => {
       return newFilterValues;
     });
   };
+  const createCourse = async () => {
+    try {
+      const response = await postFetcher(
+        '/wordbook/courses/',
+        { name: input }
+      );
+      const courseId = response.id;
+      return courseId;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
   const handleSubmit = async () => {
-    const requestBody = filteredItem.map((item) => ({
-      word: item.Index,
-      meaning: item.Eage,
-      user: user?.id,
-      course_id: 'JLR4X7jBQqpFX84WBzvVTT',
-    }));
+    const courseId = await createCourse();
+    if (!courseId) {
+      console.error('コースの作成に失敗しました');
+      return;
+    }
+    const requestBody = filteredItem.map((item) => {
+      let word: any;
+      let meaning: any;
+
+      for (const [, value] of Object.entries(item)) {
+        if (!word) {
+          word = value;
+        } else if (!meaning) {
+          meaning = value;
+        }
+      }
+
+      return {
+        word: word,
+        meaning: meaning,
+        user: user?.id,
+        course_id: courseId,
+      };
+    });
     try {
       await postFetcher(
         '/wordbook/flashcards/',
@@ -60,6 +92,9 @@ const RegisterPage = () => {
       console.error(error);
     }
     router.push('/wordlearning');
+  };
+  const handleChangeInput = (value: string) => {
+    setInput(value);
   };
 
   useEffect(() => {
@@ -106,6 +141,11 @@ const RegisterPage = () => {
           className={style.select}
           data={optionKeys}
           onChange={handleChange2}
+        />
+        <Input
+          label="単語帳名"
+          className={style.input}
+          onChange={handleChangeInput}
         />
       </div>
       <Table pres={filteredItem} />
