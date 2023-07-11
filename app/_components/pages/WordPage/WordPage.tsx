@@ -63,6 +63,7 @@ export const WordPage = ({ id }: Props) => {
   const [response, setResponse] = useState<Response | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(false);
   const findIndexById = (id: string) => {
     const index = wordsID.findIndex(
       (item: string) => item === id
@@ -115,10 +116,14 @@ export const WordPage = ({ id }: Props) => {
       user: user?.id,
     };
     try {
+      setIsLoading(true);
       await postFetcher('/wordbook/reviews/', requestBody);
+      setIsLoading(false);
       nextWord();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
     nextWord();
   };
@@ -232,12 +237,14 @@ export const WordPage = ({ id }: Props) => {
           <Button
             color="danger"
             onClick={handleIncorrectAnswer}
+            isLoading={isLoading}
           >
             不正解
           </Button>
           <Button
             color="primary"
             onClick={handleCorrectAnswer}
+            isLoading={isLoading}
           >
             正解
           </Button>
