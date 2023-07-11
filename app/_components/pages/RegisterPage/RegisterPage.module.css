@@ -24,3 +24,6 @@
 .select {
   flex: 0.3;
 }
+.input {
+  flex: 1;
+}
