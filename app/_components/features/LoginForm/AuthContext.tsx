@@ -19,11 +19,12 @@ import {
 interface Author {
   id: number;
   username: string;
+  email: string;
+  image: string;
 }
 interface AuthContextProps {
   user: Author | undefined;
   setUser: Dispatch<SetStateAction<Author | undefined>>;
-  /* eslint-disable no-unused-vars */
   loginUser: (credentials: {
     email: string;
     password: string;
