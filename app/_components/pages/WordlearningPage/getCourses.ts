@@ -7,7 +7,8 @@ interface Courses {
 
 export const getCourses = async () => {
   const data = await getFetcher<Courses[]>(
-    '/wordbook/courses/'
+    '/wordbook/courses/',
+    { cache: 'no-store' }
   );
   return {
     Data: data,
