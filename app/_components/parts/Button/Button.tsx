@@ -4,10 +4,12 @@ interface Props {
   color?: 'danger' | 'primary';
   children: React.ReactNode;
   onClick?: () => void;
+  isLoading?: boolean;
 }
 
 export const Button = (props: Props): JSX.Element => {
   const color = props.color ?? 'primary';
+  const isLoading = props.isLoading ?? false;
   return (
     <div>
       <button
@@ -16,6 +18,7 @@ export const Button = (props: Props): JSX.Element => {
         }`}
         onClick={props.onClick}
         type="submit"
+        disabled={isLoading}
       >
         {props.children}
       </button>
