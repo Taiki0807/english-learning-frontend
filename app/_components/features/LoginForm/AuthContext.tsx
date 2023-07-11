@@ -19,6 +19,8 @@ import {
 interface Author {
   id: number;
   username: string;
+  email: string;
+  image: string;
 }
 interface AuthContextProps {
   user: Author | undefined;
