@@ -28,3 +28,16 @@
   justify-content: center;
   gap: 0.25rem;
 }
+.card_list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 5rem;
+}
+.title {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  width: 100%;
+}
