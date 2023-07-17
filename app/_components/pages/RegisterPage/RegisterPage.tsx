@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useAuthContext } from '../../features/LoginForm/AuthContext';
+import { useAuthContext } from '../../features/Auth/SignIn/AuthContext';
 import { Button, Input, Select } from '../../parts';
 import style from './RegisterPage.module.css';
 import Table from './components/Table';
@@ -49,7 +49,7 @@ const RegisterPage = () => {
     try {
       const response = await postFetcher(
         '/wordbook/courses/',
-        { name: input }
+        { name: input, user: user?.id }
       );
       const courseId = response.id;
       return courseId;
