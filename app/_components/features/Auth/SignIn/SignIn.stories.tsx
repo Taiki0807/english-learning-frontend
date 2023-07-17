@@ -4,11 +4,11 @@ import {
   userEvent,
   waitFor,
 } from '@storybook/testing-library';
-import { LoginForm } from './LoginForm';
+import { SignIn } from './SignIn';
 
 const meta = {
   title: 'Components / LoginForm',
-  component: LoginForm,
+  component: SignIn,
   decorators: [
     (Story) => (
       <div
@@ -22,10 +22,10 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof LoginForm>;
+} satisfies Meta<typeof SignIn>;
 
 export default meta;
-type T = typeof LoginForm;
+type T = typeof SignIn;
 type Story = StoryObj<T>;
 
 export const Default: Story = {
