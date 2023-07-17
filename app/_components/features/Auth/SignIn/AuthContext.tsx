@@ -14,6 +14,7 @@ import {
 import {
   getFetcher,
   postFetcher,
+  postFileFetcher,
 } from '@/utils/httpClient';
 
 interface Author {
@@ -29,6 +30,14 @@ interface AuthContextProps {
     email: string;
     password: string;
   }) => Promise<void>;
+  createUser: (userData: {
+    username: string;
+    email: string;
+    password: string;
+    file: File;
+  }) => Promise<void>;
+  uploadFile: (file: File) => Promise<string>;
+  updateToken: () => Promise<void>;
 }
 
 interface AuthProps {
@@ -55,7 +64,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const [status, setStatus] = useState(0);
   const router = useRouter();
   const pathname = usePathname();
-  const isAvailableForViewing = pathname === '/signup';
+  const isAvailableForViewing =
+    pathname == ('/signup' || '/signin');
   const loginUser = async (credentials: {
     email: string;
     password: string;
@@ -66,6 +76,46 @@ export const AuthProvider = ({ children }: AuthProps) => {
     );
     if (res.success === 1) {
       getUser();
+    }
+  };
+  const uploadFile = async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const response = await postFileFetcher(
+        '/api/v1/image/post/',
+        formData
+      );
+
+      const fileUrl = response.file.url;
+      return fileUrl;
+    } catch (error) {
+      console.error(error);
+      throw new Error(
+        'ファイルのアップロードに失敗しました'
+      );
+    }
+  };
+  const createUser = async (userData: {
+    username: string;
+    email: string;
+    password: string;
+    file: File;
+  }) => {
+    try {
+      console.log(userData.username);
+      console.log(userData.file);
+      const fileUrl = await uploadFile(userData.file);
+      console.log(fileUrl);
+      await postFetcher('/api/v1/register/', {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+        image: fileUrl,
+      });
+    } catch (error) {
+      console.error(error);
     }
   };
   const getUser = async () => {
@@ -93,7 +143,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       }
     } catch (error) {
       console.error(error);
-      router.push('/signup');
+      router.push('/signin');
     }
   }, [loading, router]);
 
@@ -106,7 +156,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
       if (response.status === 1) {
         getUser();
       }
-      if (response.status === 1 && isAvailableForViewing) {
+      if (response.status == 1 && isAvailableForViewing) {
         getUser();
         router.push('/about');
       } else if (
@@ -124,17 +174,24 @@ export const AuthProvider = ({ children }: AuthProps) => {
     user,
     setUser,
     loginUser,
+    createUser,
+    uploadFile,
+    updateToken,
   };
   useEffect(() => {
     getStatus();
   }, [getStatus]);
 
   useEffect(() => {
+    if (loading) {
+      updateToken();
+      console.log('update token');
+    }
+
     const fourMinutes = 1000 * 4 * 60;
     const interval = setInterval(() => {
-      if (loading && status) {
-        updateToken();
-      }
+      updateToken();
+      console.log('fresh');
     }, fourMinutes);
 
     return () => {

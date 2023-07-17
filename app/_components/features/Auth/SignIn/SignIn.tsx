@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { z } from 'zod';
-import { Button, Form, InputField } from '../../parts';
-import style from './LoginForm.module.css';
+import { Button, Form, InputField } from '../../../parts';
+import style from './SignIn.module.css';
 
 const schema = z.object({
   email: z
@@ -23,7 +23,7 @@ interface Props {
   onSuccess: LoginSuccessCallback;
 }
 
-export const LoginForm = ({
+export const SignIn = ({
   onSuccess,
 }: Props): JSX.Element => {
   return (
@@ -63,7 +63,7 @@ export const LoginForm = ({
             <Button>Sign in</Button>
             <p className={style.signup__link}>
               No account?
-              <Link href="">Sign up</Link>
+              <Link href="/signup">Sign up</Link>
             </p>
           </>
         )}

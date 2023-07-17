@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import style from './ProfilePage.module.css';
-import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
+import { useAuthContext } from '@/app/_components/features/Auth/SignIn/AuthContext';
 export const ProfilePage = () => {
   const { user } = useAuthContext();
   const image = user?.image ?? '/blankprofile.png';

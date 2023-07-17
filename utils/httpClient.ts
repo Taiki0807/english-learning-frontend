@@ -35,6 +35,22 @@ export const postFetcher = <T>(
     }
   ).then((res) => HandleErrors(res));
 };
+export const postFileFetcher = (
+  path: string,
+  body: FormData,
+  headers = {}
+) => {
+  return fetch(
+    process.env.NEXT_PUBLIC_API_BASE_URL + path,
+    {
+      method: 'POST',
+      headers: {
+        ...headers,
+      },
+      body: body,
+    }
+  ).then((res) => HandleErrors(res));
+};
 
 const HandleErrors = (res: any) => {
   if (res.ok) {

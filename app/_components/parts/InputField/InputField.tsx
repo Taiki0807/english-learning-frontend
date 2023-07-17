@@ -6,10 +6,13 @@ import {
 
 type Props = {
   id: string;
-  type?: 'text' | 'email' | 'password';
+  type?: 'text' | 'email' | 'password' | 'file';
   label?: string;
   className?: string;
   registration: UseFormRegisterReturn;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 } & FieldWrapperPassThroughProps;
 
 export const InputField = ({
@@ -19,6 +22,7 @@ export const InputField = ({
   label,
   error,
   registration,
+  onChange,
 }: Props) => {
   return (
     <FieldWrapper error={error}>
@@ -28,6 +32,7 @@ export const InputField = ({
         className={`${className} ${error ? 'error' : ''}`}
         placeholder={label}
         {...registration}
+        onChange={onChange ?? undefined}
       />
     </FieldWrapper>
   );

@@ -1,6 +1,6 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
+import { useAuthContext } from '@/app/_components/features/Auth/SignIn/AuthContext';
 import { getFetcher } from '@/utils/httpClient';
 
 const useHeader = () => {
@@ -8,7 +8,7 @@ const useHeader = () => {
     useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const { setUser } = useAuthContext();
+  const { setUser, user } = useAuthContext();
   const handleClose = () => {
     setOpen(false);
   };
@@ -38,6 +38,7 @@ const useHeader = () => {
     anchorEl,
     NavItem,
     handleLogout,
+    user,
   };
 };
 
