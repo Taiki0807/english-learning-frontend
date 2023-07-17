@@ -10,7 +10,7 @@ export const useSignIn = () => {
     }
   };
   const handleClose = () => {
-    router.push('/wordlearning');
+    router.push('/');
   };
   return { handleSuccess, handleClose, user };
 };

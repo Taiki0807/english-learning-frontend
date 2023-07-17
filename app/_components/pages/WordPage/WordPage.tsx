@@ -157,7 +157,7 @@ export const WordPage = ({ id }: Props) => {
     } catch (error) {
       console.error(error);
     }
-    router.push('/wordlearning');
+    router.push('/');
   };
 
   const handleCloseModal = () => {
