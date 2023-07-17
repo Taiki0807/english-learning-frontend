@@ -1,0 +1,24 @@
+.carousel {
+  display: flex;
+  gap: 1rem;
+}
+.carousel__navigation {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0;
+}
+.carousel__button {
+  background-color: #fff;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dee2e6;
+  color: #0f6cbf;
+  font-size: 1.1rem;
+}
+.carousel__button__right {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.carousel__button__left {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
