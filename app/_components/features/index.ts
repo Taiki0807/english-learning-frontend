@@ -1,4 +1,4 @@
-export { LoginForm } from './LoginForm';
+export { SignIn } from './Auth/SignIn';
 export { Toast } from './Toast';
 export { WordCard } from './WordCard';
 export { Drawer } from './Drawer';
