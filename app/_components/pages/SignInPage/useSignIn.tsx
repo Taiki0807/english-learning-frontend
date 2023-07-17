@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
-import { useAuthContext } from '@/app/_components/features/LoginForm/AuthContext';
+import { useAuthContext } from '@/app/_components/features/Auth/SignIn/AuthContext';
 
-const useSignUp = () => {
+export const useSignIn = () => {
   const router = useRouter();
   const { loginUser, user } = useAuthContext();
   const handleSuccess = (values: any) => {
@@ -14,5 +14,3 @@ const useSignUp = () => {
   };
   return { handleSuccess, handleClose, user };
 };
-
-export default useSignUp;
