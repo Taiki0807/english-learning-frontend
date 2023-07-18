@@ -67,12 +67,9 @@ export const Header = (): JSX.Element => {
               anchorEl={anchorEl}
               onClose={handleClose}
             >
-              <Link
-                href="/profile"
-                className={style.dropdown__item}
-              >
-                profile
-              </Link>
+              <div className={style.dropdown__item}>
+                <Link href="/profile">profile</Link>
+              </div>
               <div
                 className={style.dropdown__divider}
               ></div>
