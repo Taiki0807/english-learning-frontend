@@ -7,6 +7,11 @@
   width: 100%;
   flex: 1;
 }
+.abortButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
 .btn {
   padding: 2rem;
   display: grid;
@@ -30,6 +35,7 @@
   cursor: pointer;
 }
 .modal__wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

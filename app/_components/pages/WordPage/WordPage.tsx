@@ -8,6 +8,7 @@ import {
 import { WordCard } from '../../features';
 import { Button, Modal, PieChart } from '../../parts';
 import style from './WordPage.module.css';
+import { AbortButton } from './components';
 import { useAuthContext } from '@/app/_components/features/Auth/SignIn/AuthContext';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import {
@@ -163,9 +164,28 @@ export const WordPage = ({ id }: Props) => {
   const handleCloseModal = () => {
     setModal(false);
   };
+  const handleAbort = async () => {
+    const today = new Date().toISOString().split('T')[0];
+    const url = `/wordbook/reviews/?course_id=${courseID}&review_date=${today}`;
+
+    const response = await getFetcher<LearningSession>(
+      url,
+      {
+        credentials: 'include',
+      }
+    );
+    if (courseID && response[courseID]?.length > 0) {
+      setResponse(response[courseID][0]);
+    }
+    setModal(true);
+  };
 
   return (
     <div className={style.wordlearningPage}>
+      <AbortButton
+        className={style.abortButton}
+        onClick={handleAbort}
+      />
       <Modal open={modal} onClose={handleCloseModal}>
         <div className={style.modal__wrapper}>
           <h1>結果🎉</h1>
