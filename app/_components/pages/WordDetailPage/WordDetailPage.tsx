@@ -6,9 +6,19 @@ import { Graph } from './components/Graph';
 import { useGetCourse } from './useGetCourse';
 import { useGetReview } from './useGetReview';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import {
+  getFetcher,
+  postFetcher,
+} from '@/utils/httpClient';
 
 interface Props {
   id: string;
+}
+interface CourseProgress {
+  id: number;
+  current_index: number;
+  user: number;
+  course: string;
 }
 export const WordDetailPage = ({ id }: Props) => {
   const router = useRouter();
@@ -19,8 +29,28 @@ export const WordDetailPage = ({ id }: Props) => {
   if (!courseTitle) return <div>loading...</div>;
   const targetData = previewData[id];
 
+  const handleStartFromBeginning = async () => {
+    postFetcher('/wordbook/reset-unconditionally/', {
+      course_id: id,
+    });
+    const nextURL = `/wordlearning/word/${wordsID[0]}/`;
+    router.push(nextURL);
+  };
+
   const handleClick = async () => {
-    router.push(`/wordlearning/word/${wordsID[0]}/`);
+    try {
+      const progressURL = `/wordbook/course-progress/${id}/`;
+
+      const response = await getFetcher<CourseProgress>(
+        progressURL
+      );
+      const nextURL = `/wordlearning/word/${
+        wordsID[response.current_index]
+      }/`;
+      router.push(nextURL);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className={style.wordDetail}>
@@ -38,7 +68,14 @@ export const WordDetailPage = ({ id }: Props) => {
         </div>
         <Graph previewData={previewData} id={id} />
       </div>
-      <Button onClick={handleClick}>学習開始</Button>
+      <div className={style.startButton}>
+        <Button onClick={handleStartFromBeginning}>
+          はじめから学習開始
+        </Button>
+        <Button onClick={handleClick}>
+          前回の続きから学習開始
+        </Button>
+      </div>
     </div>
   );
 };
