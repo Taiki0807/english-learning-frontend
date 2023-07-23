@@ -42,8 +42,8 @@ export const Carousel = ({ cards }: any) => {
         {displayedCards.map((card: any) => (
           <Card
             key={card.id}
-            id={card.id}
-            name={card.name}
+            id={card.course.id}
+            name={card.course.name}
           />
         ))}
       </div>
