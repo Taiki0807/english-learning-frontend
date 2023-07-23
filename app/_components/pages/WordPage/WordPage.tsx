@@ -8,6 +8,7 @@ import {
 import { WordCard } from '../../features';
 import { Button, Modal, PieChart } from '../../parts';
 import style from './WordPage.module.css';
+import { AbortButton } from './components';
 import { useAuthContext } from '@/app/_components/features/Auth/SignIn/AuthContext';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import {
@@ -166,6 +167,7 @@ export const WordPage = ({ id }: Props) => {
 
   return (
     <div className={style.wordlearningPage}>
+      <AbortButton className={style.abortButton} />
       <Modal open={modal} onClose={handleCloseModal}>
         <div className={style.modal__wrapper}>
           <h1>結果🎉</h1>
