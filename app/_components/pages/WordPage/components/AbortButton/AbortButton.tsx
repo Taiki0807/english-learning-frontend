@@ -3,10 +3,17 @@ import style from './AbortButton.module.css';
 
 interface Props {
   className: string;
+  onClick?: () => void;
 }
-export const AbortButton = ({ className }: Props) => {
+export const AbortButton = ({
+  className,
+  onClick,
+}: Props) => {
   return (
-    <button className={`${style.abortButton} ${className}`}>
+    <button
+      className={`${style.abortButton} ${className}`}
+      onClick={onClick}
+    >
       <div className={style.sign}>
         <MdClose
           color="white"
