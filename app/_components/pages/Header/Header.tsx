@@ -14,12 +14,14 @@ export const Header = (): JSX.Element => {
     anchorEl,
     NavItem,
     handleLogout,
+    user,
   } = useHeader();
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
+  const imageUrl = user?.image ?? '/blankprofile.png';
   return (
     <header className={style.header}>
       <div className={style.header__wrapper}>
@@ -44,7 +46,7 @@ export const Header = (): JSX.Element => {
           <div className={style.line}></div>
           <div className={style.header__right}>
             <Image
-              src="/blankprofile.png"
+              src={imageUrl}
               width={35}
               height={35}
               alt="icon"
@@ -65,9 +67,9 @@ export const Header = (): JSX.Element => {
               anchorEl={anchorEl}
               onClose={handleClose}
             >
-              <p className={style.dropdown__item}>
-                profile
-              </p>
+              <div className={style.dropdown__item}>
+                <Link href="/profile">profile</Link>
+              </div>
               <div
                 className={style.dropdown__divider}
               ></div>

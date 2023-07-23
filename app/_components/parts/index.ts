@@ -5,4 +5,5 @@ export { InputField } from './InputField';
 export { Modal } from './Modal';
 export { PieChart } from './PieChart';
 export { Select } from './Select';
-export {Input} from './Input';
+export { Input } from './Input';
+export { Carousel } from './Carousel';

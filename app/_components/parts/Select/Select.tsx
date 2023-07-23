@@ -22,9 +22,7 @@ export const Select = ({
         defaultValue=""
         onChange={(event) => onChange(event.target.value)}
       >
-        <option value="" selected>
-          {label}
-        </option>
+        <option value="">{label}</option>
         {data?.map((value: string) => (
           <option key={value} value={value}>
             {value}
