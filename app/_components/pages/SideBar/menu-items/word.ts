@@ -1,4 +1,4 @@
-import { FaBook } from 'react-icons/fa';
+import { FaBook, FaHome } from 'react-icons/fa';
 const word = {
   id: 'pages',
   title: 'Pages',
@@ -6,16 +6,26 @@ const word = {
   type: 'group',
   children: [
     {
-      id: 'authentication',
-      title: 'Authentication',
+      id: 'home',
+      title: 'home',
+      type: 'item',
+      url: '/',
+      icon: FaHome,
+      external: true,
+      target: true,
+      breadcrumbs: true,
+    },
+    {
+      id: 'Word',
+      title: 'Word',
       type: 'collapse',
       icon: FaBook,
       children: [
         {
-          id: 'profile',
-          title: 'Profile',
+          id: 'register',
+          title: 'register',
           type: 'item',
-          url: '/pages/login/profile',
+          url: '/wordlearning/register',
           target: true,
         },
       ],

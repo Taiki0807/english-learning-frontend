@@ -91,7 +91,7 @@ const RegisterPage = () => {
     } catch (error) {
       console.error(error);
     }
-    router.push('/wordlearning');
+    router.push('/');
   };
   const handleChangeInput = (value: string) => {
     setInput(value);

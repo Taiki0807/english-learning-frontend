@@ -97,7 +97,12 @@
   width: 100%;
   text-align: left;
 }
-.dropdown__item:hover {
+.dropdown__item a {
+  color: black;
+  display: block;
+}
+.dropdown__item:hover,
+.dropdown__item:hover a {
   outline: 0;
   background-color: #0f6cbf;
   color: #fff;
