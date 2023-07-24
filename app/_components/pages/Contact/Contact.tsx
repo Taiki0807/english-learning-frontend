@@ -1,5 +1,8 @@
 'use client';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { z } from 'zod';
+import { Toast } from '../../features';
 import { FieldWrapper } from '../../parts/Form';
 import style from './Contact.module.css';
 import {
@@ -20,14 +23,41 @@ const schema = z.object({
 export type FormData = z.infer<typeof schema>;
 
 export const Contact = () => {
-  const handleSubmit = (data: FormData) => {
-    fetch('/api/email', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
+  const handleSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch('/api/email', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log('ok');
+        setSuccess(true);
+      } else {
+        console.error(
+          'Error sending email:',
+          response.status
+        );
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  };
+  const handleClose = () => {
+    setSuccess(false);
+    router.push('/');
   };
   return (
     <div className={style.contact}>
+      {success && (
+        <Toast
+          outHideDuration={3000}
+          message="送信しました。"
+          onClose={handleClose}
+        />
+      )}
       <Form<FormData, typeof schema>
         onSubmit={async (values) => {
           handleSubmit(values);
