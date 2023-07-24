@@ -16,6 +16,7 @@
 - zod (スキーマ定義およびバリデーションライブラリ)
 - SWR (データ取得の React Hooks)
 - Recoil (状態管理)
+- nodemailer(メール送信)
 
 ## npm script
 

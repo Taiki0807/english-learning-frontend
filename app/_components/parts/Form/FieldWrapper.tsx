@@ -17,7 +17,7 @@ export const FieldWrapper = ({
   children,
 }: Props) => {
   return (
-    <div>
+    <div className={style.fieldWrapper}>
       {children}
       {error?.message && (
         <div
