@@ -6,6 +6,9 @@ const nextConfig = {
   eslint: {
     dirs: ['app'],
   },
+  images: {
+    domains: ['english-learning-backend.fly.dev'],
+  },
 };
 
 module.exports = nextConfig;
