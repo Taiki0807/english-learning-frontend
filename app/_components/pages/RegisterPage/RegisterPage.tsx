@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../features/Auth/SignIn/AuthContext';
-import { Button, Input, Select } from '../../parts';
+import { Button, Input, Modal, Select } from '../../parts';
 import style from './RegisterPage.module.css';
 import Table from './components/Table';
 import { UploadWord } from '@/app/_components/features';
@@ -22,8 +22,10 @@ const RegisterPage = () => {
     useState<any[]>(pres);
   const [input, setInput] = useState('');
   const { user } = useAuthContext();
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     if (pres && pres.length > 0) {
+      setModal(true);
       const keys = Object.keys(pres[0]).map(
         (key: string) => key
       );
@@ -96,6 +98,9 @@ const RegisterPage = () => {
   const handleChangeInput = (value: string) => {
     setInput(value);
   };
+  const handleCloseModal = () => {
+    setModal(false);
+  };
 
   useEffect(() => {
     if (!filterValues[0]) {
@@ -125,30 +130,32 @@ const RegisterPage = () => {
       </div>
 
       <UploadWord pres={pres} setPres={setPres} />
-      <div className={style.table__title}>
-        <h2>単語一覧確認</h2>
+      <Modal open={modal} onClose={handleCloseModal}>
+        <div className={style.table__title}>
+          <h2>単語一覧確認</h2>
+        </div>
+        <div className={style.table__top}>
+          <Select
+            label="単語選択"
+            className={style.select}
+            data={optionKeys}
+            onChange={handleChange}
+          />
+          <Select
+            label="意味選択"
+            className={style.select}
+            data={optionKeys}
+            onChange={handleChange2}
+          />
+          <Input
+            label="単語帳名"
+            className={style.input}
+            onChange={handleChangeInput}
+          />
+        </div>
+        <Table pres={filteredItem} />
         <Button onClick={handleSubmit}>登録</Button>
-      </div>
-      <div className={style.table__top}>
-        <Select
-          label="単語のカラム名を選択"
-          className={style.select}
-          data={optionKeys}
-          onChange={handleChange}
-        />
-        <Select
-          label="意味のカラム名を選択"
-          className={style.select}
-          data={optionKeys}
-          onChange={handleChange2}
-        />
-        <Input
-          label="単語帳名"
-          className={style.input}
-          onChange={handleChangeInput}
-        />
-      </div>
-      <Table pres={filteredItem} />
+      </Modal>
     </div>
   );
 };
