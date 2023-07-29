@@ -34,7 +34,7 @@ interface AuthContextProps {
     username: string;
     email: string;
     password: string;
-    file: File;
+    fileUrl: string;
   }) => Promise<void>;
   uploadFile: (file: File) => Promise<string>;
   updateToken: () => Promise<void>;
@@ -101,18 +101,16 @@ export const AuthProvider = ({ children }: AuthProps) => {
     username: string;
     email: string;
     password: string;
-    file: File;
+    fileUrl: string;
   }) => {
     try {
       console.log(userData.username);
-      console.log(userData.file);
-      const fileUrl = await uploadFile(userData.file);
-      console.log(fileUrl);
+      console.log(userData.fileUrl);
       await postFetcher('/api/v1/register/', {
         username: userData.username,
         email: userData.email,
         password: userData.password,
-        image: fileUrl,
+        image: userData.fileUrl,
       });
     } catch (error) {
       console.error(error);
