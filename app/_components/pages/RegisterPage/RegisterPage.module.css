@@ -1,8 +1,9 @@
 .registerPage {
   margin: 0 auto;
-  height: calc(100vh - 61px);
   width: 100%;
   padding: 0 16rem;
+  max-width: calc(100vw - 300px);
+  max-height: calc(100vh - 61px);
 }
 .table__title {
   display: flex;
