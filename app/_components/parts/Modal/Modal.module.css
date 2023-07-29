@@ -12,11 +12,12 @@
 }
 .overlay > .content {
   z-index: 200;
-  min-width: 30%;
+  min-width: 40%;
   padding: 1em;
   background: #fff;
   color: black;
   min-height: 300px;
+  border-radius: 0.5rem;
 }
 .close__btn {
   --close-btn-size: 30px;
