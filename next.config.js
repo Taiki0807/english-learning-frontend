@@ -7,7 +7,10 @@ const nextConfig = {
     dirs: ['app'],
   },
   images: {
-    domains: ['english-learning-backend.fly.dev'],
+    domains: [
+      'english-learning-backend.fly.dev',
+      'res.cloudinary.com',
+    ],
   },
 };
 
