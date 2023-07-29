@@ -16,15 +16,7 @@ const schema = z.object({
     .string()
     .min(1, 'パスワードを入力してください'),
   username: z.string().min(1, 'usernameを入力してください'),
-  file: z
-    .custom<FileList>()
-    .transform((file) => file[0])
-    .refine((file) => {
-      if (file) {
-        return true;
-      }
-      return false;
-    }, 'ファイルが必須です'),
+  file: z.custom<FileList>().transform((file) => file[0]),
 });
 
 export type LoginCredentials = z.infer<typeof schema>;
