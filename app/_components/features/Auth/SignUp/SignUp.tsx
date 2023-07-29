@@ -16,15 +16,7 @@ const schema = z.object({
     .string()
     .min(1, 'パスワードを入力してください'),
   username: z.string().min(1, 'usernameを入力してください'),
-  file: z
-    .custom<FileList>()
-    .transform((file) => file[0])
-    .refine((file) => {
-      if (file) {
-        return true;
-      }
-      return false;
-    }, 'ファイルが必須です'),
+  fileUrl: z.any(),
 });
 
 export type LoginCredentials = z.infer<typeof schema>;
@@ -62,6 +54,7 @@ export const SignIn = ({
     <div>
       <Form<LoginCredentials, typeof schema>
         onSubmit={async (values) => {
+          values.fileUrl = fileUrl;
           onSuccess(values);
         }}
         schema={schema}
@@ -84,10 +77,11 @@ export const SignIn = ({
                 id="file"
                 type="file"
                 label="file"
-                error={formState.errors.file}
-                registration={register('file')}
+                registration={register('fileUrl')}
                 className={`${style.input__file} ${
-                  formState.errors.file ? style.error : ''
+                  formState.errors.fileUrl
+                    ? style.error
+                    : ''
                 }`}
                 onChange={onChange}
               />
