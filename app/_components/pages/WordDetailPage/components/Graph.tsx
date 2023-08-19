@@ -18,12 +18,9 @@ interface Props {
 
 export const Graph = ({ previewData, id }: Props) => {
   const targetData = previewData[id];
-  console.log(
-    'retention_rates',
-    targetData[0]?.user_learning_data?.review_dates
-  );
 
   if (
+    targetData &&
     targetData[0]?.user_learning_data?.review_dates &&
     targetData[0].user_learning_data.review_dates.length >=
       3

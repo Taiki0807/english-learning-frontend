@@ -31,8 +31,6 @@ export const calculateExponential = (
       day: value.toString(),
       retentionRates: Math.exp(-(value - i * 7) / s) * 100,
     }));
-    console.log(yRange);
-
     result.xRange.push(...xRange);
     result.yRange.push(...yRange);
     result.data.push(...data);
@@ -45,7 +43,11 @@ export const calculateElapsedTimes = (
 ): number[] => {
   const elapsedTimes: number[] = [];
 
-  for (let i = 0; i < reviewDates.length; i += 3) {
+  for (
+    let i = 0;
+    i < reviewDates.length - (reviewDates.length % 3);
+    i += 3
+  ) {
     const firstDate = new Date(reviewDates[i]);
     const thirdDate = new Date(reviewDates[i + 2]);
     const elapsedTime =

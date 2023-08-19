@@ -63,7 +63,10 @@ export const WordDetailPage = ({ id }: Props) => {
           </h2>
           <h3>
             正解率:
-            {targetData[0].course_progress_rate * 100}%
+            {targetData
+              ? targetData[0].course_progress_rate * 100
+              : ''}
+            %
           </h3>
         </div>
         <Graph previewData={previewData} id={id} />
